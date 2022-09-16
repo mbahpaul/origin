@@ -1,7 +1,6 @@
 resource "aws_instance" "test_instance" {
   ami           = "ami-05fa00d4c63e32376"
   instance_type = "t2.micro"
-  vpc_security_group_ids = [aws_security_group.test_instance.id]
 
    user_data = <<-EOF
               #!/bin/bash
@@ -13,16 +12,5 @@ resource "aws_instance" "test_instance" {
 
  tags = {
     Name = "test-instance"
-  }
-}
-
-resource "aws_security_group" "test_instance" {
-  name = "test-instance-instance"
-
-  ingress {
-    from_port   = 8080
-    to_port     = 8080
-    protocol    = "tcp"
-    cidr_blocks = ["0.0.0.0/0"]
   }
 }
